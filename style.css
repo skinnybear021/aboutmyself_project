@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
   background-image: url('Gallery/background.gif');
   background-size: cover;
@@ -5,6 +7,8 @@ body {
   background-attachment: fixed;
   color: white;
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .gallery-section {
@@ -53,24 +57,91 @@ body {
     opacity: 1;
 }
 
-.gallery-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+#pfp-bio-container {
+  display: flex;
+  align-items: flex-start; /* Aligns items to the start of the cross axis (top) */
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
+#pfp {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 15px; /* Space between pfp and bio-box */
 }
 
-details {
+.bio-box {
+  width: 590px;
+  height: 190px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 0; /* Resetting margin-top as it's now handled by the container */
+  margin-left: 0; /* Resetting margin-left */
+}
+
+#welcome-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1.5s ease-out;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+}
+
+#welcome-screen.fade-out {
+  opacity: 0;
+}
+
+#welcome-screen h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+#welcome-screen p {
+  color: white;
+  font-size: 1rem;
+}
+
+#random-notes-container {
+  margin-top: 20px;
+  margin-left: 15px;
+  width: 805px; /* Matches the combined width of pfp and bio-box for alignment */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+#show-random-note-btn {
   background-color: #333;
   color: white;
-  margin-bottom: 10px;
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-  padding: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 20px;
 }
 
-summary {
-  cursor: pointer;
-  outline: none;
+#note-display {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 5px;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
 }

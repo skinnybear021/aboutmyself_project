@@ -1,68 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const loader = document.getElementById("loader");
-    const mainGallery = document.getElementById("main-gallery");
+window.addEventListener('load', () => {
+  const welcomeScreen = document.getElementById('welcome-screen');
 
-    // Gallery data is now directly in the script to avoid fetch issues on local files.
-    const galleryData = {};
+  setTimeout(() => {
+    welcomeScreen.classList.add('fade-out');
+  }, 2000); // 2 seconds delay
 
-    const hideLoader = () => {
-        loader.classList.add("hidden");
-    };
+  setTimeout(() => {
+    welcomeScreen.style.display = 'none';
+  }, 3500); // 2s + 1.5s = 3.5s total
 
-    const buildGallery = (data) => {
-        if (!data || Object.keys(data).length === 0) {
-            mainGallery.innerHTML = "<p>Gallery is empty.</p>";
-            hideLoader();
-            return;
-        }
 
-        const imageLoadPromises = [];
+  const showRandomNoteBtn = document.getElementById('show-random-note-btn');
+  const noteDisplay = document.getElementById('note-display');
 
-        Object.keys(data).forEach(folderName => {
-            const section = document.createElement("div");
-            section.classList.add("gallery-section");
+  const notes = [
+    `      <p>"Mundane penance in exhaustion to merit worthiness while feeling undeserving. Without morale."</p>
 
-            const title = document.createElement("h2");
-            title.classList.add("gallery-title");
-            title.textContent = folderName.replace(/_/g, " ");
-            section.appendChild(title);
+      <p>(Beat.)</p>
 
-            const grid = document.createElement("div");
-            grid.classList.add("image-grid");
+      <p>"That\'s all.</p>`,
+    `      <p>"Expression as compulsion. The futile broadcast of the insignificant. Personal or digital makes no difference—both are just screaming into voids, hoping for echo. Not needed, never needed, yet performed anyway. Mundane self-flagellation masquerading as authenticity. Exhausting oneself to earn acknowledgment from the equally exhausted. Undeserving of audience. Without morale. The performance never stops."</p>`,
+    `      <p>ignorance can sometimes be still bliss</p>`,
+    `      <p>always reason with life. without passion. without anything.</p>`,
+    `      <p>to bear.</p>`,
+    `      <p>to be noticed.</p>`
+  ];
 
-            data[folderName].forEach(imgFile => {
-                const item = document.createElement("div");
-                item.classList.add("gallery-item");
-
-                const img = document.createElement("img");
-                img.src = `Gallery/${folderName}/${imgFile}`;
-                img.alt = imgFile;
-
-                const promise = new Promise((resolve) => {
-                    img.onload = resolve;
-                    img.onerror = () => {
-                        console.error(`Failed to load image: ${img.src}`);
-                        resolve(); // Resolve even on error to not block the gallery
-                    };
-                });
-                imageLoadPromises.push(promise);
-
-                item.appendChild(img);
-                grid.appendChild(item);
-            });
-
-            section.appendChild(grid);
-            mainGallery.appendChild(section);
-        });
-
-        Promise.all(imageLoadPromises).then(hideLoader);
-    };
-
-    try {
-        buildGallery(galleryData);
-    } catch (err) {
-        console.error("Error building gallery:", err);
-        mainGallery.innerHTML = `<p style="color:red; text-align:center;">A critical error occurred while building the gallery.</p>`;
-        hideLoader();
+  showRandomNoteBtn.addEventListener('click', () => {
+    if (notes.length > 0) {
+      const randomIndex = Math.floor(Math.random() * notes.length);
+      noteDisplay.innerHTML = notes[randomIndex];
     }
+  });
 });
